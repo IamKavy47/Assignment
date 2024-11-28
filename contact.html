@@ -1,136 +1,288 @@
-import React, { useState } from 'react';
-import { Mail, Phone, User, MessageCircle } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-blue: #2c3e6f;
+            --secondary-blue: #3498db;
+            --light-background: #f0f4f8;
+            --white: #ffffff;
+        }
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  const [errors, setErrors] = useState({});
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--light-background);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-  const validateForm = () => {
-    const newErrors = {};
+        .contact-container {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+        }
 
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-    }
+        .contact-header h1 {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
 
-    // Phone validation (optional, but check format if provided)
-    const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
-    if (formData.phone.trim() && !phoneRegex.test(formData.phone)) {
-      newErrors.phone = 'Invalid phone number';
-    }
+        .contact-header h1::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background-color: var(--secondary-blue);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
 
-    // Message validation
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // TODO: Add form submission logic (e.g., send to backend)
-      console.log('Form submitted:', formData);
-      alert('Form submitted successfully!');
-    }
-  };
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--secondary-blue);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
 
-  return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-blue-700 mb-6 text-center">Contact Us</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <div className="flex items-center border-b border-blue-200 pb-2">
-            <User className="text-blue-500 mr-3" size={20} />
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full bg-transparent outline-none text-blue-900"
-            />
-          </div>
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 14px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 6px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+      <nav class="navbar">
+        <a href="home.html" class="logo"></a>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
 
-        <div>
-          <div className="flex items-center border-b border-blue-200 pb-2">
-            <Mail className="text-blue-500 mr-3" size={20} />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full bg-transparent outline-none text-blue-900"
-            />
-          </div>
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="qualification.html">Qualifications</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="privacy.html">Privacy and Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">Working On!</a></li>
+            <li><a href="resources.html">resource</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
 
-        <div>
-          <div className="flex items-center border-b border-blue-200 pb-2">
-            <Phone className="text-blue-500 mr-3" size={20} />
-            <input
-              type="tel"
-              name="phone"
-              placeholder="Phone Number (Optional)"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full bg-transparent outline-none text-blue-900"
-            />
-          </div>
-          {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
+        <div class="contact-header">
+            <h1>Contact Us</h1>
         </div>
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error" id="nameError"></div>
+            </div>
 
-        <div>
-          <div className="flex items-start border-b border-blue-200 pb-2">
-            <MessageCircle className="text-blue-500 mr-3 mt-2" size={20} />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full bg-transparent outline-none text-blue-900 resize-none h-24"
-            />
-          </div>
-          {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-        </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error" id="emailError"></div>
+            </div>
 
-        <button 
-          type="submit" 
-          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          Send Message
-        </button>
-      </form>
+            <div class="form-group">
+                <label for="phone">Phone (Optional)</label>
+                <input type="tel" id="phone" name="phone">
+                <div class="error" id="phoneError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+                <div class="error" id="messageError"></div>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
     </div>
-  );
-};
 
-export default ContactForm;
+    <script>
+      const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const phoneInput = document.getElementById('phone');
+            const messageInput = document.getElementById('message');
+
+            // Error display elements
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const phoneError = document.getElementById('phoneError');
+            const messageError = document.getElementById('messageError');
+
+            // Validation functions
+            function validateName() {
+                if (nameInput.value.trim().length < 2) {
+                    nameError.textContent = 'Name must be at least 2 characters long';
+                    return false;
+                }
+                nameError.textContent = '';
+                return true;
+            }
+
+            function validateEmail() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                    return false;
+                }
+                emailError.textContent = '';
+                return true;
+            }
+
+            function validatePhone() {
+                // Optional phone number validation
+                if (phoneInput.value.trim() !== '') {
+                    const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+                    if (!phoneRegex.test(phoneInput.value)) {
+                        phoneError.textContent = 'Please enter a valid phone number';
+                        return false;
+                    }
+                }
+                phoneError.textContent = '';
+                return true;
+            }
+
+            function validateMessage() {
+                if (messageInput.value.trim().length < 10) {
+                    messageError.textContent = 'Message must be at least 10 characters long';
+                    return false;
+                }
+                messageError.textContent = '';
+                return true;
+            }
+
+            // Add event listeners for real-time validation
+            nameInput.addEventListener('blur', validateName);
+            emailInput.addEventListener('blur', validateEmail);
+            phoneInput.addEventListener('blur', validatePhone);
+            messageInput.addEventListener('blur', validateMessage);
+
+            // Form submission handler
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // Validate all fields
+                const isNameValid = validateName();
+                const isEmailValid = validateEmail();
+                const isPhoneValid = validatePhone();
+                const isMessageValid = validateMessage();
+
+                // Check if all validations pass
+                if (isNameValid && isEmailValid && isPhoneValid && isMessageValid) {
+                    // In a real-world scenario, you would send the form data to a server
+                    alert('Form submitted successfully!\n\nNote: This is a demo. In a real application, this would send data to a backend.');
+                    
+                    // Optional: Reset the form
+                    form.reset();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Family</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-blue: #2c3e8f;
+            --secondary-blue: #3498db;
+            --light-blue: #e6f2ff;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--light-blue);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .family-member {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .family-member:hover {
+            transform: scale(1.05);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .family-member:hover .member-image {
+            filter: grayscale(0%);
+        }
+
+        .member-details {
+            padding: 20px;
+            background-color: var(--secondary-blue);
+            color: var(--white);
+        }
+
+        .member-details h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .member-details p {
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .family-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="home.html" class="logo"></a>
+            
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+    
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="qualification.html">Qualifications</a></li>
+                <li><a href="contact.html">Contact us!</a></li>
+                <li><a href="family.html">Family</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="github.html">Github</a></li>
+                <li><a href="privacy.html">Privacy and Policy</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="404.html">Working On!</a></li>
+                <li><a href="resources.html">resource</a></li>
+                <li><a href="project.html">Projects</a></li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Our Family</h1>
+        </header>
+
+        <div id="familyMembers" class="family-grid">
+            <!-- Family members will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        // Family members data
+        const familyMembers = [
+            {
+                name: 'John Smith',
+                role: 'Father',
+                age: 45,
+                occupation: 'Software Engineer',
+                description: 'Loving father and tech enthusiast',
+                imageUrl: '/api/placeholder/300/300?text=John'
+            },
+            {
+                name: 'Emily Smith',
+                role: 'Mother',
+                age: 42,
+                occupation: 'Elementary School Teacher',
+                description: 'Caring mother and passionate educator',
+                imageUrl: '/api/placeholder/300/300?text=Emily'
+            },
+            {
+                name: 'Michael Smith',
+                role: 'Eldest Son',
+                age: 22,
+                occupation: 'College Student',
+                description: 'Computer Science major and aspiring software developer',
+                imageUrl: '/api/placeholder/300/300?text=Michael'
+            },
+            {
+                name: 'Sarah Smith',
+                role: 'Daughter',
+                age: 18,
+                occupation: 'High School Senior',
+                description: 'Talented artist and future graphic design student',
+                imageUrl: '/api/placeholder/300/300?text=Sarah'
+            },
+            {
+                name: 'Emma Smith',
+                role: 'Youngest Daughter',
+                age: 12,
+                occupation: 'Middle School Student',
+                description: 'Passionate about dance and creative writing',
+                imageUrl: '/api/placeholder/300/300?text=Emma'
+            },
+            {
+                name: 'Grandpa Robert',
+                role: 'Grandfather',
+                age: 75,
+                occupation: 'Retired Professor',
+                description: 'Wisdom-filled storyteller and family historian',
+                imageUrl: '/api/placeholder/300/300?text=Robert'
+            }
+        ];
+
+        // Function to create family member cards
+        function renderFamilyMembers() {
+            const familyContainer = document.getElementById('familyMembers');
+            
+            familyMembers.forEach(member => {
+                const memberCard = document.createElement('div');
+                memberCard.classList.add('family-member');
+                
+                memberCard.innerHTML = `
+                    <img src="${member.imageUrl}" alt="${member.name}" class="member-image">
+                    <div class="member-details">
+                        <h2>${member.name}</h2>
+                        <p><strong>Role:</strong> ${member.role}</p>
+                        <p><strong>Age:</strong> ${member.age}</p>
+                        <p><strong>Occupation:</strong> ${member.occupation}</p>
+                        <p>${member.description}</p>
+                    </div>
+                `;
+                
+                familyContainer.appendChild(memberCard);
+            });
+        }
+
+        // Render family members when the page loads
+        document.addEventListener('DOMContentLoaded', renderFamilyMembers);
+    </script>
+</body>
+</html>

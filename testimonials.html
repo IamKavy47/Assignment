@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Testimonials</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #34495e;
+            --background-color: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .testimonial-container {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .testimonial.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .testimonial-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color);
+            margin: 0 auto 20px;
+        }
+
+        .testimonial-quote {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--text-color);
+            max-width: 600px;
+            margin: 0 auto 15px;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .testimonial-quote::before,
+        .testimonial-quote::after {
+            content: '"';
+            color: var(--secondary-color);
+            font-size: 40px;
+            position: absolute;
+            top: -10px;
+            opacity: 0.3;
+        }
+
+        .testimonial-quote::before {
+            left: 0;
+        }
+
+        .testimonial-quote::after {
+            right: 0;
+            top: auto;
+            bottom: -30px;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .nav-btn {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0 15px;
+            pointer-events: auto;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+            transform: scale(1.1);
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 0;
+            transition: width linear;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-container {
+                margin: 0 15px;
+                padding: 30px 20px;
+            }
+
+            .testimonial-quote {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="testimonial-container">
+        <div class="navigation">
+            <button class="nav-btn prev-btn">&#10094;</button>
+            <button class="nav-btn next-btn">&#10095;</button>
+        </div>
+
+        <div id="testimonials">
+            <div class="testimonial active">
+                <img src="/api/placeholder/100/100" alt="Sarah Johnson" class="testimonial-image">
+                <p class="testimonial-quote">Claude has been an incredible assistant. The precision and depth of analysis are truly remarkable in transforming our approach to complex problem-solving.</p>
+                <p class="testimonial-name">Sarah Johnson</p>
+                <p style="font-size: 14px; color: var(--secondary-color);">Tech Lead</p>
+            </div>
+            <div class="testimonial">
+                <img src="/api/placeholder/100/100" alt="Michael Chen" class="testimonial-image">
+                <p class="testimonial-quote">Working with Claude transformed our project workflow. The insights provided are consistently impressive and have elevated our team's productivity.</p>
+                <p class="testimonial-name">Michael Chen</p>
+                <p style="font-size: 14px; color: var(--secondary-color);">Product Manager</p>
+            </div>
+            <div class="testimonial">
+                <img src="/api/placeholder/100/100" alt="Emma Rodriguez" class="testimonial-image">
+                <p class="testimonial-quote">Claude's ability to break down complex problems is unparalleled. It has been a game-changer for our research and development strategy.</p>
+                <p class="testimonial-name">Emma Rodriguez</p>
+                <p style="font-size: 14px; color: var(--secondary-color);">Research Director</p>
+            </div>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const testimonials = document.querySelectorAll('.testimonial');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const progressBar = document.querySelector('.progress-bar');
+            let currentIndex = 0;
+            let autoRotateInterval;
+            const ROTATE_DURATION = 5000; // 5 seconds per testimonial
+
+            function showTestimonial(index) {
+                testimonials.forEach(testimonial => {
+                    testimonial.classList.remove('active');
+                });
+                testimonials[index].classList.add('active');
+            }
+
+            function rotateTestimonial() {
+                currentIndex = (currentIndex + 1) % testimonials.length;
+                showTestimonial(currentIndex);
+                startProgressBar();
+            }
+
+            function startProgressBar() {
+                progressBar.style.width = '0%';
+                progressBar.style.transition = `width ${ROTATE_DURATION}ms linear`;
+                progressBar.style.width = '100%';
+            }
+
+            function resetAutoRotate() {
+                clearInterval(autoRotateInterval);
+                autoRotateInterval = setInterval(rotateTestimonial, ROTATE_DURATION);
+            }
+
+            nextBtn.addEventListener('click', () => {
+                rotateTestimonial();
+                resetAutoRotate();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+                showTestimonial(currentIndex);
+                startProgressBar();
+                resetAutoRotate();
+            });
+
+            // Initial progress bar start
+            startProgressBar();
+
+            // Start auto-rotate
+            autoRotateInterval = setInterval(rotateTestimonial, ROTATE_DURATION);
+
+            // Pause auto-rotate on hover
+            const container = document.querySelector('.testimonial-container');
+            container.addEventListener('mouseenter', () => {
+                clearInterval(autoRotateInterval);
+                progressBar.style.width = '0%';
+                progressBar.style.transition = 'none';
+            });
+
+            container.addEventListener('mouseleave', () => {
+                resetAutoRotate();
+                startProgressBar();
+            });
+        });
+    </script>
+</body>
+</html>

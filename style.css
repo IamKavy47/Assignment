@@ -78,7 +78,7 @@ body {
     transition: 0.4s;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 10000px) {
     .nav-links {
         display: none;
         position: fixed;

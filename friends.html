@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections Network</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --deep-blue: #1a2980;
+            --gradient-blue: #26d0ce;
+            --soft-gray: #f4f4f4;
+            --text-dark: #2c3e50;
+            --accent-color: #6a11cb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--deep-blue), var(--gradient-blue));
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .friend-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .friend-card:hover {
+            transform: rotateY(10deg) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .friend-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--deep-blue), var(--accent-color));
+        }
+
+        .friend-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(110%);
+            transition: filter 0.3s ease;
+        }
+
+        .friend-card:hover img {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        .friend-info {
+            padding: 20px;
+            background: var(--soft-gray);
+        }
+
+        .friend-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--deep-blue);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .friend-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--deep-blue), var(--accent-color));
+        }
+
+        .friend-achievements {
+            list-style-type: none;
+        }
+
+        .friend-achievements li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-dark);
+            opacity: 0.9;
+        }
+
+        .friend-achievements li::before {
+            content: '★';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .friends-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .wave-divider {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 50px;
+        }
+
+        .wave-divider .shape-fill {
+            fill: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="home.html" class="logo"></a>
+            
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+    
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="qualification.html">Qualifications</a></li>
+                <li><a href="contact.html">Contact us!</a></li>
+                <li><a href="family.html">Family</a></li>
+                <li><a href="friends.html">Friends</a></li>
+                <li><a href="friends.html">Team</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="github.html">Github</a></li>
+                <li><a href="privacy.html">Privacy and Policy</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="404.html">Working On!</a></li>
+                <li><a href="resources.html">resource</a></li>
+                <li><a href="project.html">Projects</a></li>
+            </ul>
+        </nav>
+    
+        <div class="container">
+            <h1>My Friends</h1>
+            <p>A curated collection of extraordinary individuals</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="friends-grid" id="friendsContainer">
+            <!-- Friends will be dynamically added here -->
+        </section>
+    </main>
+
+    <div class="wave-divider">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#ffffff"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#ffffff"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#ffffff"></path>
+        </svg>
+    </div>
+
+    <script>
+         const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        // Friend data
+        const friends = [
+            {
+                name: "Alex Rodriguez",
+                image: "/api/placeholder/250/350",
+                achievements: [
+                    "Graduated with honors from Stanford",
+                    "Published research in Machine Learning",
+                    "Founded a successful tech startup"
+                ]
+            },
+            {
+                name: "Emma Thompson",
+                image: "/api/placeholder/250/350",
+                achievements: [
+                    "Award-winning documentary filmmaker",
+                    "TED Talk speaker",
+                    "Environmental activist"
+                ]
+            },
+            {
+                name: "Michael Chen",
+                image: "/api/placeholder/250/350",
+                achievements: [
+                    "Olympic gold medalist in swimming",
+                    "Motivational speaker",
+                    "Youth sports coach"
+                ]
+            },
+            {
+                name: "Sophia Patel",
+                image: "/api/placeholder/250/350",
+                achievements: [
+                    "Neurosurgeon at leading research hospital",
+                    "Medical innovation grant recipient",
+                    "Global health volunteer"
+                ]
+            }
+        ];
+
+        // Function to create friend cards
+        function renderFriends() {
+            const container = document.getElementById('friendsContainer');
+            
+            friends.forEach(friend => {
+                const card = document.createElement('div');
+                card.classList.add('friend-card');
+                
+                card.innerHTML = `
+                    <img src="${friend.image}" alt="${friend.name}">
+                    <div class="friend-info">
+                        <div class="friend-name">${friend.name}</div>
+                        <ul class="friend-achievements">
+                            ${friend.achievements.map(achievement => 
+                                `<li>${achievement}</li>`
+                            ).join('')}
+                        </ul>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Render friends when page loads
+        document.addEventListener('DOMContentLoaded', renderFriends);
+    </script>
+</body>
+</html>
