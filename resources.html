@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Developer Resources Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            border-bottom: 2px solid #5e5e5e;
+            padding-bottom: 10px;
+        }
+        #filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #category-filter, #search-input {
+            padding: 8px;
+            margin: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .resource-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .resource-card:hover {
+            transform: scale(1.03);
+        }
+        .resource-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .resource-card p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .resource-card a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .resource-card .category {
+            background-color: #f1f1f1;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="home.html" class="logo"></a>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="privacy.html">Privacy and Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">Working On!</a></li>
+            <li><a href="resources.html">resource</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
+    <h1>🚀 Developer Resources Hub</h1>
+    
+    <div id="filter-container">
+        <select id="category-filter">
+            <option value="">All Categories</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Programming">Programming</option>
+            <option value="Machine Learning">Machine Learning</option>
+        </select>
+        <input type="text" id="search-input" placeholder="Search resources...">
+    </div>
+
+    <div id="resources" class="resource-list"></div>
+    <script src="script.js"></script>
+    <script>
+        const resources = [
+            {
+                title: "MDN Web Docs",
+                description: "Comprehensive web development documentation by Mozilla",
+                link: "https://developer.mozilla.org",
+                category: "Web Development"
+            },
+            {
+                title: "freeCodeCamp",
+                description: "Free coding courses and projects for learning programming",
+                link: "https://www.freecodecamp.org",
+                category: "Machine Learning"
+            },
+            {
+                title: "GitHub Learning Lab",
+                description: "Interactive coding lessons and projects",
+                link: "https://lab.github.com",
+                category: "Programming"
+            },
+            {
+                title: "Kaggle",
+                description: "Machine learning competitions and datasets",
+                link: "https://www.kaggle.com",
+                category: "Machine Learning"
+            },
+            {
+                title: "Youtube",
+                description: "CodeWithHarry",
+                link: "https://www.kaggle.com",
+                category: "Programming"
+            },
+        ];
+
+        function renderResources(filteredResources) {
+            const container = document.getElementById('resources');
+            container.innerHTML = '';
+            
+            filteredResources.forEach(resource => {
+                const card = document.createElement('div');
+                card.className = 'resource-card';
+                card.innerHTML = `
+                    <h3>${resource.title}</h3>
+                    <p>${resource.description}</p>
+                    <a href="${resource.link}" target="_blank">Visit Website</a>
+                    <div class="category">${resource.category}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterResources() {
+            const categoryFilter = document.getElementById('category-filter').value;
+            const searchInput = document.getElementById('search-input').value.toLowerCase();
+
+            const filteredResources = resources.filter(resource => 
+                (categoryFilter === '' || resource.category === categoryFilter) &&
+                (resource.title.toLowerCase().includes(searchInput) || 
+                 resource.description.toLowerCase().includes(searchInput))
+            );
+
+            renderResources(filteredResources);
+        }
+
+        document.getElementById('category-filter').addEventListener('change', filterResources);
+        document.getElementById('search-input').addEventListener('input', filterResources);
+
+        // Initial render
+        renderResources(resources);
+    </script>
+</body>
+</html>

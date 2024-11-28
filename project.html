@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .filter-btn {
+            padding: 8px 15px;
+            background-color: #e0e0e0;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .filter-btn.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+        .project-card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .project-card .category {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .project-card .description {
+            color: #444;
+            margin-bottom: 15px;
+        }
+        .project-card .link {
+            display: inline-block;
+            color: #1976D2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="home.html" class="logo">My Projects</a>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="privacy.html">Privacy and Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">Working On!</a></li>
+            <li><a href="resources.html">resource</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
+    <h1></h1>
+    
+    <div class="filter-container">
+        <button class="filter-btn active" data-category="all">All Projects</button>
+        <button class="filter-btn" data-category="web">Web</button>
+        <button class="filter-btn" data-category="data">Machine Learning</button>
+    </div>
+
+    <div id="projectGrid" class="project-grid">
+        <div class="project-card" data-category="web">
+            <h3>EcoTracker</h3>
+            <div class="category">Web Application</div>
+            <div class="description">A sustainability tracking platform that helps users monitor and reduce their carbon footprint.</div>
+            <a href="#" class="link">View Project</a>
+        </div>
+
+        <div class="project-card" data-category="mobile">
+            <h3>FitBuddy</h3>
+            <div class="category">Mobile App</div>
+            <div class="description">Personal fitness tracking and workout recommendation app with AI-powered insights.</div>
+            <a href="#" class="link">View Project</a>
+        </div>
+
+        <div class="project-card" data-category="data">
+            <h3>MarketSense</h3>
+            <div class="category">Data Science</div>
+            <div class="description">Machine learning model for stock market trend prediction using sentiment analysis.</div>
+            <a href="#" class="link">View Project</a>
+        </div>
+
+        <div class="project-card" data-category="web">
+            <h3>CodeCollab</h3>
+            <div class="category">Web Platform</div>
+            <div class="description">Real-time collaborative coding environment with integrated version control.</div>
+            <a href="#" class="link">View Project</a>
+        </div>
+
+        <div class="project-card" data-category="mobile">
+            <h3>LanguageLens</h3>
+            <div class="category">Mobile App</div>
+            <div class="description">Augmented reality language translation app with offline capabilities.</div>
+            <a href="#" class="link">View Project</a>
+        </div>
+
+        <div class="project-card" data-category="data">
+            <h3>HealthInsights</h3>
+            <div class="category">Data Science</div>
+            <div class="description">Predictive healthcare analytics platform for early disease detection.</div>
+            <a href="#" class="link">View Project</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    const category = button.getAttribute('data-category');
+
+                    projectCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        
+                        if (category === 'all' || cardCategory === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

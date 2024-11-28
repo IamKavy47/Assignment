@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .faq-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .faq-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: #0066cc;
+        }
+
+        .faq-answer {
+            display: none;
+            padding-top: 10px;
+            color: #666;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.rotate {
+            transform: rotate(180deg);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="home.html" class="logo">FAQ</a>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="privacy.html">Privacy and Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">Working On!</a></li>
+            <li><a href="resources.html">resource</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
+    <div class="faq-container">
+        <h1 class="faq-title">Frequently Asked Questions</h1>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What is your return policy?</span>
+                <span class="toggle-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                We offer a 30-day return policy for all unused items in their original packaging. Customers are responsible for return shipping costs unless the item is defective.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How long does shipping take?</span>
+                <span class="toggle-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                Standard shipping typically takes 3-5 business days within the continental United States. Expedited shipping options are available at checkout for faster delivery.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you offer international shipping?</span>
+                <span class="toggle-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                Yes, we ship to many countries worldwide. Shipping times and costs vary depending on the destination. Additional customs fees may apply and are the responsibility of the customer.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How can I track my order?</span>
+                <span class="toggle-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                Once your order is shipped, you'll receive a confirmation email with a tracking number. You can use this number on our website's order tracking page or the carrier's website to monitor your package's progress.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What payment methods do you accept?</span>
+                <span class="toggle-icon">➕</span>
+            </div>
+            <div class="faq-answer">
+                We accept major credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay. All transactions are securely processed to protect your financial information.
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Select all FAQ items
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        // Add click event listener to each FAQ item
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            const toggleIcon = item.querySelector('.toggle-icon');
+
+            question.addEventListener('click', () => {
+                // Toggle answer visibility
+                answer.classList.toggle('active');
+
+                // Rotate toggle icon
+                toggleIcon.classList.toggle('rotate');
+
+                // Change toggle icon text
+                toggleIcon.textContent = answer.classList.contains('active') ? '➖' : '➕';
+            });
+        });
+    </script>
+</body>
+</html>

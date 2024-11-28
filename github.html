@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source Projects & Contributions</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-color: #58a6ff;
+            --border-color: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .profile-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+            border: 3px solid var(--accent-color);
+        }
+
+        .profile-info h1 {
+            color: var(--text-primary);
+            font-size: 24px;
+        }
+
+        .profile-info p {
+            color: var(--text-secondary);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .project-card h2 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .project-card .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-tag {
+            background-color: var(--bg-primary);
+            color: var(--accent-color);
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Contribution Graph */
+        .contribution-graph {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .contribution-grid {
+            display: grid;
+            grid-template-columns: repeat(53, 1fr);
+            gap: 2px;
+        }
+
+        .contribution-square {
+            aspect-ratio: 1;
+            background-color: #161b22;
+        }
+
+        .contribution-square.active {
+            background-color: #39d353;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-header img {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="home.html" class="logo">Github</a>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="privacy.html">Privacy and Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">Working On!</a></li>
+            <li><a href="resources.html">resource</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <img src="pfp.jpeg" alt="Profile Picture" id="profile-image">
+            <div class="profile-info">
+                <h1 id="profile-name">AI/ML Developer</h1>
+                <p id="profile-bio">Passionate about creating meaningful open-source solutions</p>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div id="projects-container" class="projects-grid">
+            <!-- Projects will be dynamically populated here -->
+        </div>
+
+        <!-- Contribution Graph -->
+        <div class="contribution-graph">
+            <h2>Contribution Graph</h2>
+            <div class="contribution-grid" id="contribution-grid">
+                <!-- Contribution squares will be dynamically generated -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Sample Project Data
+        const projects = [
+            {
+                name: "MediBot",
+                description: "An AI chatbot for mentally depressed peoples.",
+                technologies: ["Python", "Streamlit", "MongoDB","Scikit-learn","TensorFlow"],
+                githubLink: "git@github.com:IamKavy47/Medibot.git",
+                liveLink: "https://medibot-squad.streamlit.app"
+            },
+            {
+                name: "Netflix Clone",
+                description: "Front-end Clone of Netflix",
+                technologies: ["HTML", "CSS", "Javascript"],
+                githubLink: "https://github.com/username/ml-library",
+                liveLink: "https://iamkavy47-clone.netlify.app/"
+            },
+            {
+                name: "Portfolio",
+                description: "My Portfolio website.",
+                technologies: ["HTML", "CSS", "Javascript"],
+                githubLink: "git@github.com:IamKavy47/portfolio.git",
+                liveLink: "https://fitness-app.com"
+            },
+            {
+                name: "Climate Data Visualization",
+                description: "Interactive web application for exploring global climate change data.",
+                technologies: ["D3.js", "Python", "Django"],
+                githubLink: "https://github.com/username/climate-viz",
+                liveLink: "https://climate-dashboard.org"
+            }
+        ];
+
+        // Render Projects
+        function renderProjects() {
+            const projectsContainer = document.getElementById('projects-container');
+            projectsContainer.innerHTML = projects.map(project => `
+                <div class="project-card">
+                    <h2>${project.name}</h2>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-tags">
+                        ${project.technologies.map(tech => `
+                            <span class="project-tag">${tech}</span>
+                        `).join('')}
+                    </div>
+                    <div class="project-links">
+                        <a href="${project.githubLink}" target="_blank">
+                            <svg height="16" width="16" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                            </svg>
+                            GitHub
+                        </a>
+                        <a href="${project.liveLink}" target="_blank">
+                            <svg height="16" width="16" viewBox="0 0 16 16">
+                                <path fill="currentColor" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
+                            </svg>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Generate Contribution Graph
+        function generateContributionGraph() {
+            const contributionGrid = document.getElementById('contribution-grid');
+            const totalSquares = 53 * 7; // 53 weeks, 7 days per week
+            
+            // Generate contribution squares
+            const contributionSquares = Array.from({ length: totalSquares }, () => {
+                const square = document.createElement('div');
+                square.classList.add('contribution-square');
+                
+                // Randomly activate some squares to simulate contributions
+                if (Math.random() > 0.7) {
+                    square.classList.add('active');
+                }
+                
+                return square;
+            });
+
+            // Append squares to the grid
+            contributionGrid.append(...contributionSquares);
+        }
+
+        // Initialize Page
+        function initPage() {
+            renderProjects();
+            generateContributionGraph();
+        }
+
+        // Run initialization when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

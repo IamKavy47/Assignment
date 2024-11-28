@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Passions and Interests</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f4f6f7;
+            --text-color: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Interest Categories */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .interest-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .interest-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .interest-card h2 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: black;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 15% auto;
+            }
+        }
+
+        /* Interactive Elements */
+        .skill-bar {
+            width: 100%;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .skill-level {
+            height: 10px;
+            border-radius: 5px;
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="home.html" class="logo"></a>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="privacy.html">Privacy and Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">Working On!</a></li>
+            <li><a href="resources.html">resource</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
+    <div class="header container">
+        <h1>My Personal Interests and Passions</h1>
+        <p>Exploring the world beyond work, one hobby at a time</p>
+    </div>
+
+    <div class="container interests-grid" id="interests-container">
+        <!-- Interests will be dynamically added here -->
+    </div>
+
+    <div id="interestModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <div id="modalSkills"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        const interests = [
+            {
+                id: 'photography',
+                title: 'Photography',
+                icon: '/api/placeholder/100/100',
+                description: 'Capturing moments and telling stories through the lens. I love exploring different styles of photography, from landscape to street photography.',
+                skills: [
+                    { name: 'Landscape Photography', level: 85 },
+                    { name: 'Portrait Techniques', level: 70 },
+                    { name: 'Photo Editing', level: 65 }
+                ]
+            },
+            {
+                id: 'hiking',
+                title: 'Hiking & Outdoor Adventures',
+                icon: '/api/placeholder/100/100',
+                description: 'Exploring nature, challenging myself physically, and discovering beautiful landscapes. Hiking is my way of staying connected with the natural world.',
+                skills: [
+                    { name: 'Trail Navigation', level: 80 },
+                    { name: 'Endurance', level: 90 },
+                    { name: 'Wilderness Survival', level: 65 }
+                ]
+            },
+            {
+                id: 'cooking',
+                title: 'Culinary Exploration',
+                icon: '/api/placeholder/100/100',
+                description: 'Experimenting with cuisines from around the world. Cooking is my form of creative expression and a way to connect with different cultures.',
+                skills: [
+                    { name: 'International Cuisine', level: 75 },
+                    { name: 'Baking', level: 65 },
+                    { name: 'Meal Presentation', level: 70 }
+                ]
+            },
+            {
+                id: 'music',
+                title: 'Music & Instrument Learning',
+                icon: '/api/placeholder/100/100',
+                description: 'Playing guitar and exploring various music genres. Music is my escape and a powerful form of emotional expression.',
+                skills: [
+                    { name: 'Guitar Playing', level: 80 },
+                    { name: 'Music Theory', level: 60 },
+                    { name: 'Songwriting', level: 55 }
+                ]
+            },
+            {
+                id: 'reading',
+                title: 'Reading & Writing',
+                icon: '/api/placeholder/100/100',
+                description: 'Diving into books across various genres and occasionally writing short stories or personal essays.',
+                skills: [
+                    { name: 'Fiction Reading', level: 90 },
+                    { name: 'Non-Fiction Research', level: 75 },
+                    { name: 'Creative Writing', level: 65 }
+                ]
+            },
+            {
+                id: 'fitness',
+                title: 'Fitness & Wellness',
+                icon: '/api/placeholder/100/100',
+                description: 'Maintaining a holistic approach to physical and mental health through regular exercise and mindfulness practices.',
+                skills: [
+                    { name: 'Strength Training', level: 80 },
+                    { name: 'Yoga', level: 70 },
+                    { name: 'Meditation', level: 75 }
+                ]
+            }
+        ];
+
+        // Render Interests
+        function renderInterests() {
+            const container = document.getElementById('interests-container');
+            container.innerHTML = interests.map(interest => `
+                <div class="interest-card" data-id="${interest.id}">
+                    <img src="${interest.icon}" alt="${interest.title}">
+                    <h2>${interest.title}</h2>
+                </div>
+            `).join('');
+
+            // Add click event listeners
+            document.querySelectorAll('.interest-card').forEach(card => {
+                card.addEventListener('click', () => openModal(card.dataset.id));
+            });
+        }
+
+        // Open Modal
+        function openModal(interestId) {
+            const interest = interests.find(i => i.id === interestId);
+            const modal = document.getElementById('interestModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalSkills = document.getElementById('modalSkills');
+
+            modalTitle.textContent = interest.title;
+            modalDescription.textContent = interest.description;
+            
+            // Create skill bars
+            modalSkills.innerHTML = interest.skills.map(skill => `
+                <div>
+                    <p>${skill.name}</p>
+                    <div class="skill-bar">
+                        <div class="skill-level" style="width: ${skill.level}%"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            modal.style.display = 'block';
+        }
+
+        // Close Modal
+        function setupModalClose() {
+            const modal = document.getElementById('interestModal');
+            const closeBtn = document.querySelector('.close-modal');
+
+            closeBtn.onclick = () => {
+                modal.style.display = 'none';
+            };
+
+            // Close modal when clicking outside of it
+            window.onclick = (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            };
+        }
+
+        // Initialize Page
+        function initPage() {
+            renderInterests();
+            setupModalClose();
+        }
+
+        // Run initialization when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

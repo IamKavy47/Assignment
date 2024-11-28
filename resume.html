@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #333;
+            --background-color: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .resume-container {
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--secondary-color);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+        }
+
+        .job-title, .education-degree {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .company, .school {
+            font-style: italic;
+            color: var(--secondary-color);
+        }
+
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .skills-table th, .skills-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .skills-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .certifications-list {
+            list-style-type: none;
+        }
+
+        .certifications-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .certifications-list li::before {
+            content: '✓';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .print-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: var(--accent-color);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .print-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            .resume-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .print-btn {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .resume-container {
+                padding: 20px;
+            }
+
+            .skills-table {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .resume-container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .skills-table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <nav class="navbar">
+            <a href="home.html" class="logo"></a>
+            
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+    
+            <ul class="nav-links" id="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="github.html">Github</a></li>
+                <li><a href="privacy.html">Privacy and Policy</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="404.html">Working On!</a></li>
+                <li><a href="resources.html">resource</a></li>
+                <li><a href="project.html">Projects</a></li>
+            </ul>
+        </nav>
+        <div class="header">
+            <h1>Kavy Porwal</h1>
+            <p>Software Engineer | Web Developer | AI/ML Engineer</p>
+            <p>kavyporwal75@gmail.com | 9691672623 | Mandsaur</p>
+        </div>
+
+        <section class="section experience">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-item">
+                <h3 class="job-title">AI/ML Student</h3>
+                <ul>
+                    <li>Led development of scalable web applications using React and Node.js</li>
+                    <li>Implemented microservices architecture, improving system performance by 40%</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3 class="job-title">Web Developer</h3>
+                <p class="company">Digital Dynamics Inc., Oakland, CA</p>
+                <p class="duration">August 2016 - May 2019</p>
+                <ul>
+                    <li>Developed responsive web applications using HTML5, CSS3, and JavaScript</li>
+                    <li>Integrated third-party APIs and optimized database queries</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <h3 class="education-degree">B.tech CSE(AI)</h3>
+                <p class="school">Mandsaur University</p>
+                <p class="duration">2024-2028</p>
+                <p>Specialization in Machine Learning and Artificial Intelligence</p>
+            </div>
+            <div class="education-item">
+            </div>
+        </section>
+
+        <section class="section skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <table class="skills-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Skills</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Programming Languages</td>
+                        <td>JavaScript, Python, Java, C </td>
+                    </tr>
+                    <tr>
+                        <td>Web Technologies</td>
+                        <td>React, Node.js, Express, HTML5, CSS</td>
+                    </tr>
+                    <tr>
+                        <td>Databases</td>
+                        <td>MongoDB, MySQL</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud & DevOps</td>
+                        <td>AWS, Docker, Kubernetes, Jenkins, Git</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section certifications">
+            <h2 class="section-title">Certifications</h2>
+            <ul class="certifications-list">
+                <li>AWS Certified Solutions Architect - Professional</li>
+                <li>Google Cloud Certified - Professional Cloud Developer</li>
+                <li>Certified Kubernetes Administrator (CKA)</li>
+                <li>Oracle Certified Professional, Java SE 11 Developer</li>
+            </ul>
+        </section>
+
+        <a href="#" class="print-btn" onclick="window.print(); return false;">Print Resume</a>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Optional: Add some subtle interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            
+            sections.forEach(section => {
+                section.addEventListener('mouseenter', () => {
+                    section.style.transform = 'scale(1.02)';
+                    section.style.transition = 'transform 0.3s ease';
+                });
+                
+                section.addEventListener('mouseleave', () => {
+                    section.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

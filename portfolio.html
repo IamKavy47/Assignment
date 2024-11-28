@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Showcase</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f4f7f6;
+            --card-background: #ffffff;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background-color: var(--primary-color);
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            margin: 0 10px 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .project-tag {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .project-links {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--primary-color);
+        }
+
+        .project-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .project-modal-content {
+            background-color: #fefefe;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .project-modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .project-modal-close:hover {
+            color: black;
+        }
+
+        @media screen and (max-width: 768px) {
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn {
+                margin: 0 0 10px 0;
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="home.html" class="logo"></a>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="hobbies.html">Hobbies</a></li>
+            <li><a href="github.html">Github</a></li>
+            <li><a href="privacy.html">Privacy and Policy</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="404.html">Working On!</a></li>
+            <li><a href="resources.html">resource</a></li>
+            <li><a href="project.html">Projects</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <header class="header">
+            <h1>Portfolio Showcase</h1>
+            <p>A collection of projects demonstrating creativity, technical skills, and innovative solutions</p>
+        </header>
+
+        <div class="filter-container" id="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <!-- Filter buttons will be dynamically added by JavaScript -->
+        </div>
+
+        <div class="projects" id="project-container">
+            <!-- Projects will be dynamically added by JavaScript -->
+        </div>
+
+        <div class="project-modal" id="project-modal">
+            <div class="project-modal-content" id="project-modal-content">
+                <span class="project-modal-close">&times;</span>
+                <!-- Modal content will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Project data
+        const projects = [
+            {
+                id: 1,
+                title: "E-Commerce Dashboard",
+                description: "A comprehensive dashboard for managing online store operations, featuring real-time analytics, inventory tracking, and sales reporting.",
+                fullDescription: "This advanced e-commerce dashboard was developed to provide store owners with deep insights into their business performance. Key features include:\n\n- Real-time sales tracking\n- Inventory management\n- Customer behavior analytics\n- Customizable reporting\n- Responsive design for mobile and desktop",
+                image: "/api/placeholder/800/600",
+                tags: ["React", "Redux", "Dashboard", "Data Visualization"],
+                technologies: ["React", "Redux", "Chart.js", "Node.js", "MongoDB"],
+                githubLink: "#",
+                liveLink: "#",
+                category: ["web", "frontend"]
+            },
+            {
+                id: 2,
+                title: "Machine Learning Image Classifier",
+                description: "A neural network-powered image classification tool that can identify objects with high accuracy using transfer learning.",
+                fullDescription: "This machine learning project demonstrates the power of deep learning in image recognition. Key highlights:\n\n- Utilizes pre-trained CNN models\n- Supports multiple object categories\n- High accuracy through transfer learning\n- User-friendly web interface\n- Supports drag-and-drop image uploads",
+                image: "/api/placeholder/800/600",
+                tags: ["Machine Learning", "AI", "Python", "Neural Networks"],
+                technologies: ["TensorFlow", "Keras", "Python", "Flask", "React"],
+                githubLink: "#",
+                liveLink: "#",
+                category: ["ml", "ai"]
+            },
+            {
+                id: 3,
+                title: "Cryptocurrency Tracker",
+                description: "Real-time cryptocurrency price tracking and analysis application with advanced charting and portfolio management.",
+                fullDescription: "A comprehensive crypto tracking solution that provides:\n\n- Real-time price updates\n- Historical price charts\n- Portfolio tracking\n- Price alerts\n- Multi-currency support\n- Responsive design",
+                image: "/api/placeholder/800/600",
+                tags: ["Crypto", "Finance", "Real-time", "API"],
+                technologies: ["React", "WebSocket", "CoinGecko API", "Chart.js"],
+                githubLink: "#",
+                liveLink: "#",
+                category: ["web", "finance"]
+            }
+        ];
+
+        // Render projects
+        function renderProjects(filteredProjects) {
+            const projectContainer = document.getElementById('project-container');
+            projectContainer.innerHTML = filteredProjects.map(project => `
+                <div class="project-card" data-category="${project.category.join(' ')}">
+                    <img src="${project.image}" alt="${project.title}" class="project-image">
+                    <div class="project-content">
+                        <h2 class="project-title">${project.title}</h2>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                        </div>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-links">
+                            <a href="#" class="project-link view-details" data-id="${project.id}">View Details</a>
+                            <a href="#" class="project-link live-demo" data-id="${project.id}">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add event listeners to view details
+            document.querySelectorAll('.view-details').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const projectId = e.target.getAttribute('data-id');
+                    openProjectModal(projectId);
+                });
+            });
+        }
+
+        // Open project modal
+        function openProjectModal(projectId) {
+            const project = projects.find(p => p.id === parseInt(projectId));
+            if (project) {
+                const modal = document.getElementById('project-modal');
+                const modalContent = document.getElementById('project-modal-content');
+
+                modalContent.innerHTML = `
+                    <span class="project-modal-close">&times;</span>
+                    <h2 class="project-title">${project.title}</h2>
+                    <img src="${project.image}" alt="${project.title}" class="project-image" style="width: 100%; margin-bottom: 20px;">
+                    <div class="project-tags">
+                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                    </div>
+                    <h3 style="margin: 20px 0 10px;">Description</h3>
+                    <p class="project-description">${project.fullDescription.replace(/\n/g, '<br>')}</p>
+                    <h3 style="margin: 20px 0 10px;">Technologies</h3>
+                    <div class="project-tags">
+                        ${project.technologies.map(tech => `<span class="project-tag">${tech}</span>`).join('')}
+                    </div>
+                    <div class="project-links" style="margin-top: 20px;">
+                        <a href="${project.githubLink}" class="project-link">GitHub</a>
+                        <a href="${project.liveLink}" class="project-link">Live Demo</a>
+                    </div>
+                `;
+
+                // Close button functionality
+                const closeBtn = modalContent.querySelector('.project-modal-close');
+                closeBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+
+                modal.style.display = 'flex';
+            }
+        }
+
+        // Create filter buttons
+        function createFilterButtons() {
+            const filterContainer = document.getElementById('filter-buttons');
+            const categories = [...new Set(projects.flatMap(p => p.category))];
+            
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.classList.add('filter-btn');
+                button.setAttribute('data-filter', category);
+                button.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                filterContainer.appendChild(button);
+            });
+
+            // Add filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.getAttribute('data-filter');
+                    
+                    if (filter === 'all') {
+                        renderProjects(projects);
+                    } else {
+                        const filteredProjects = projects.filter(project => 
+                            project.category.includes(filter)
+                        );
+                        renderProjects(filteredProjects);
+                    }
+                });
+            });
+
+            // Close modal when clicking outside
+            const modal = document.getElementById('project-modal');
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects(projects);
+            createFilterButtons();
+        });
+    </script>
+</body>
+</html>
