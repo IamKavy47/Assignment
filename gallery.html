@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kavy Porwal - About Me</title>
+    <title>Photo Gallery</title>
     <style>
+        /* Navigation Bar Styles */
         * {
             margin: 0;
             padding: 0;
@@ -14,7 +15,7 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            background-color: #f0f4f8;
+            background-color: #f4f6f9;
             color: #333;
         }
 
@@ -25,12 +26,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #0d47a1;
+            color: #1a1a1a;
             text-decoration: none;
         }
 
@@ -44,7 +47,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: #1565c0;
+            color: #555;
             font-weight: 500;
             font-size: 0.95rem;
             transition: color 0.3s ease;
@@ -53,7 +56,7 @@
         }
 
         .nav-links a:hover {
-            color: #2196f3;
+            color: #007bff;
         }
 
         .nav-links a::after {
@@ -63,7 +66,7 @@
             height: 2px;
             bottom: 0;
             left: 0;
-            background-color: #2196f3;
+            background-color: #007bff;
             transition: width 0.3s ease;
         }
 
@@ -80,81 +83,112 @@
         .bar {
             width: 25px;
             height: 2px;
-            background-color: #0d47a1;
+            background-color: #333;
             margin: 3px 0;
             transition: 0.4s;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+        /* Gallery Styles */
+        :root {
+            --primary-color: #2c5282;
+            --secondary-color: #3182ce;
+            --background-color: #e6f2ff;
+            --text-color: #1a365d;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
+        .gallery-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            position: relative;
+            perspective: 1000px;
         }
 
-        .header h1 {
-            color: #0d47a1;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            color: #1565c0;
-            font-size: 1.1rem;
-        }
-
-        .profile {
+        .gallery {
             display: flex;
+            justify-content: center;
             align-items: center;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            width: 100%;
+            height: 350px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s linear infinite;
         }
 
-        .profile-image {
-            width: 250px;
+        .gallery:hover {
+            animation-play-state: paused;
+        }
+
+        .gallery-item {
+            position: absolute;
+            width: 50%;
             height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 2rem;
-            border: 4px solid #2196f3;
-        }
-
-        .section {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .section h2 {
-            color: #0d47a1;
-            border-bottom: 2px solid #2196f3;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .skills {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: rotateY(calc(var(--offset) * 60deg)) translateZ(300px);
+            transition: all 0.5s ease;
+            opacity: 0.7;
         }
 
-        .skill-tag {
-            background-color: #e3f2fd;
-            color: #1565c0;
-            padding: 0.3rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        .gallery-item.active {
+            opacity: 1;
+            transform: rotateY(calc(var(--offset) * 60deg)) translateZ(500px);
         }
 
+        .gallery-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .paused {
+            animation-play-state: paused !important;
+        }
+
+        .reversed {
+            animation-direction: reverse !important;
+        }
+
+        /* Responsive Styles */
         @media screen and (max-width: 1024px) {
             .nav-links {
                 display: none;
@@ -163,7 +197,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: #e3f2fd;
+                background-color: white;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -203,22 +237,12 @@
             .hamburger.active .bar:nth-child(3) {
                 transform: rotate(45deg) translate(-5px, -6px);
             }
-
-            .profile {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .profile-image {
-                margin-right: 0;
-                margin-bottom: 1rem;
-            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <a href="404.html" class="logo">Kavy Porwal</a>
+        <a href="404.html" class="logo">Photo Gallery</a>
         
         <div class="hamburger" id="hamburger">
             <div class="bar"></div>
@@ -250,59 +274,30 @@
         </ul>
     </nav>
 
-    <div class="container">
-        <div class="header">
-            <h1>Kavy Porwal</h1>
-            <p>Software Developer | Tech Enthusiast | Problem Solver</p>
-        </div>
-
-        <div class="profile">
-            <img src="pfp.jpeg" alt="Kavy Porwal" class="profile-image">
-            <div>
-                <h2>About Me</h2>
-                <p>I'm a passionate software developer with a keen interest in creating innovative technological solutions. My journey in tech is driven by curiosity, continuous learning, and a desire to make a meaningful impact through code.</p>
-                <p>I believe in clean, efficient, and scalable software design, and I'm always excited to take on challenging projects that push the boundaries of what's possible.</p>
+    <div class="gallery-container">
+        <div class="gallery" id="gallery">
+            <div class="gallery-item" style="--offset: 0">
+                <img src="/api/placeholder/600/400" alt="Image 1">
+            </div>
+            <div class="gallery-item" style="--offset: 1">
+                <img src="/api/placeholder/600/400" alt="Image 2">
+            </div>
+            <div class="gallery-item" style="--offset: 2">
+                <img src="/api/placeholder/600/400" alt="Image 3">
+            </div>
+            <div class="gallery-item" style="--offset: 3">
+                <img src="/api/placeholder/600/400" alt="Image 4">
+            </div>
+            <div class="gallery-item" style="--offset: 4">
+                <img src="/api/placeholder/600/400" alt="Image 5">
+            </div>
+            <div class="gallery-item" style="--offset: 5">
+                <img src="/api/placeholder/600/400" alt="Image 6">
             </div>
         </div>
-
-        <div class="section">
-            <h2>Education</h2>
-            <h3>Bachelor of Technology in Computer Science</h3>
-            <p>Mandsaur University | 2024-2028</p>
-            <p>Key Coursework: Data Structures, Algorithms, Machine Learning, Web Development</p>
-        </div>
-
-        <div class="section">
-            <h2>Professional Skills</h2>
-            <div class="skills">
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">HTML/CSS</span>
-                <span class="skill-tag">SQL</span>
-                <span class="skill-tag">Machine Learning</span>
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">AWS</span>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Interests & Hobbies</h2>
-            <p>Beyond coding, I'm passionate about:</p>
-            <ul>
-                <li>Open-source contributions</li>
-                <li>Learning new AI skills</li>
-                <li>Reading science and technology blogs</li>
-                <li>Photography</li>
-                <li>Hiking and outdoor adventures</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Contact</h2>
-            <p>Email: kavyporwal75@gmail.com</p>
-            <p>LinkedIn: /in/kavy-porwal</p>
-            <p>GitHub: @iamkavy47</p>
+        <div class="gallery-controls">
+            <button class="control-btn" id="pausePlay">Pause</button>
+            <button class="control-btn" id="reverse">Reverse</button>
         </div>
     </div>
 
@@ -320,6 +315,40 @@
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
             });
+        });
+
+        const gallery = document.getElementById('gallery');
+        const pausePlayBtn = document.getElementById('pausePlay');
+        const reverseBtn = document.getElementById('reverse');
+        let isPaused = false;
+        let isReversed = false;
+
+        pausePlayBtn.addEventListener('click', () => {
+            if (isPaused) {
+                // Resume animation
+                gallery.classList.remove('paused');
+                pausePlayBtn.textContent = 'Pause';
+                isPaused = false;
+            } else {
+                // Pause animation
+                gallery.classList.add('paused');
+                pausePlayBtn.textContent = 'Play';
+                isPaused = true;
+            }
+        });
+
+        reverseBtn.addEventListener('click', () => {
+            if (isReversed) {
+                // Set to normal direction
+                gallery.classList.remove('reversed');
+                reverseBtn.textContent = 'Reverse';
+                isReversed = false;
+            } else {
+                // Set to reverse direction
+                gallery.classList.add('reversed');
+                reverseBtn.textContent = 'Normal';
+                isReversed = true;
+            }
         });
     </script>
 </body>
